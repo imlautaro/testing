@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#00897b">
+
+    <link rel="stylesheet" href="css/materialize.min.css">
+
+    <link rel="manifest" href="manifest.webmanifest">
+
+    <title>Testing</title>
+</head>
+
+<body>
+    <nav class="teal">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Testing</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <button onclick="test()" class="btn waves-effect waves-light">Test</button>
+    </div>
+
+    <script src="js/materialize.min.js"></script>
+    <script>
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').then(function (registration) {
+                console.log('Service Worker Registered');
+            }).catch(function (err) {
+                console.log('Service Worker Failed', err);
+            });
+        }
+
+        function sayHello() {
+            setInterval(() => {
+                new Notification('Hello', {
+                    body: 'Hello!',
+                })
+            }, 1000 * 5)
+        }
+
+
+        function test() {
+            Notification.requestPermission().then(result => {
+                if (result === 'granted') {
+                    sayHello();
+                }
+            })
+        }
+
+    </script>
+</body>
+
+</html>
